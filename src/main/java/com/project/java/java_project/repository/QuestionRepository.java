@@ -28,8 +28,8 @@ public interface QuestionRepository extends JpaRepository<QuestionsEntity,Intege
                                                  @Param("keyword") String keyword);
 
 
-    @Query("SELECT q FROM QuestionsEntity q LEFT JOIN FETCH q.mediaEntityList m WHERE q.id = :id")
-    Optional<QuestionsEntity> findByIdWithMedia(@Param("id") Long id);
+//    @Query("SELECT q FROM QuestionsEntity q LEFT JOIN FETCH q.mediaEntityList m WHERE q.id = :id")
+//    Optional<QuestionsEntity> findByIdWithMedia(@Param("id") Long id);
 
 
 

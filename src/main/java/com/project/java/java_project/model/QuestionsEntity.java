@@ -2,12 +2,10 @@ package com.project.java.java_project.model;
 
 import jakarta.persistence.*;
 
-import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 @Entity
-@Table(name = "Questions", schema = "java")
+@Table(name = "Questions", schema = "java", catalog = "")
 public class QuestionsEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -89,7 +87,4 @@ public class QuestionsEntity {
     public int hashCode() {
         return Objects.hash(id, topic, description, difficulty, userId, level);
     }
-
-    @OneToMany(mappedBy = "questionEntity", fetch = FetchType.LAZY)
-    private List<MediaEntity> mediaEntityList;
 }

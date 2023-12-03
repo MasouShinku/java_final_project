@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "Comment", schema = "java")
+@Table(name = "Comment", schema = "java", catalog = "")
 public class CommentEntity {
     @Basic
     @Column(name = "user_id")
