@@ -1,8 +1,11 @@
 package com.project.java.java_project.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "Questions", schema = "java", catalog = "")
@@ -87,4 +90,14 @@ public class QuestionsEntity {
     public int hashCode() {
         return Objects.hash(id, topic, description, difficulty, userId, level);
     }
+
+    @OneToMany(mappedBy = "questionsEntity")
+//    @JsonManagedReference
+    private List<MediaEntity> mediaEntityList;
+
+
+    public List<MediaEntity> getMediaEntityList() {
+        return this.mediaEntityList;
+    }
+
 }

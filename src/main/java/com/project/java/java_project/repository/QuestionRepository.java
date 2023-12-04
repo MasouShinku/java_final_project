@@ -4,6 +4,7 @@ package com.project.java.java_project.repository;
 
 import com.project.java.java_project.dto.SearchQuestionResponse;
 import com.project.java.java_project.model.QuestionsEntity;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -29,7 +30,9 @@ public interface QuestionRepository extends JpaRepository<QuestionsEntity,Intege
 
 
 //    @Query("SELECT q FROM QuestionsEntity q LEFT JOIN FETCH q.mediaEntityList m WHERE q.id = :id")
-//    Optional<QuestionsEntity> findByIdWithMedia(@Param("id") Long id);
+    @EntityGraph(attributePaths = {"mediaEntityList"})
+    Optional<QuestionsEntity> findById(@Param("id") int id);
+
 
 
 
