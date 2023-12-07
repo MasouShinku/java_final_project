@@ -8,6 +8,8 @@ import com.project.java.java_project.dto.SearchQuestionResponse;
 import com.project.java.java_project.model.QuestionsEntity;
 import com.project.java.java_project.repository.QuestionRepository;
 import com.project.java.java_project.service.QuestionService;
+import jakarta.annotation.Nonnull;
+import org.antlr.v4.runtime.misc.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,11 +25,9 @@ public class QuestionController {
     @Autowired
     private QuestionService questionService;
 
-    @Autowired
-    private QuestionRepository questionRepository;
-
 //    按条件筛选题目列表
 //    POST请求
+
     @PostMapping("/search")
     public ResponseEntity<?> searchQuestion(@RequestBody SearchQuestionRequest searchQuestionRequest){
         List<SearchQuestionResponse> searchQuestionReponse=questionService.searchQuestion(searchQuestionRequest.getLevel(), searchQuestionRequest.getDifficulty(), searchQuestionRequest.getSearchKey());
