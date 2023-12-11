@@ -16,9 +16,9 @@ import java.util.Optional;
 @Service
 public class QuestionService {
     @JsonIgnore
-    private final String[] levelArr= new String[]{"学前","小学","中学","大学","其他"};
+    private final String[] levelArr= new String[]{"\uD83E\uDD70学前\uD83D\uDE3B","\uD83D\uDE01小学\uD83E\uDD2A","\uD83E\uDD14中学\uD83D\uDE3C","\uD83E\uDD74大学\uD83D\uDE35","\uD83D\uDE28其他\uD83D\uDE33"};
     @JsonIgnore
-    private final String[] difficultyArr= new String[]{"简单","普通","困难"};
+    private final String[] difficultyArr= new String[]{"\uD83E\uDD24简单\uD83D\uDE0E","\uD83D\uDE2F普通\uD83E\uDD2F","\uD83D\uDE08困难\uD83D\uDE40"};
 
     @Autowired
     private QuestionRepository questionRepository;
@@ -45,7 +45,7 @@ public class QuestionService {
         questionDetailResponse.setTitle(questionsEntity.get().getTopic());
         questionDetailResponse.setDescription(questionsEntity.get().getDescription());
         questionDetailResponse.setDifficulty(difficultyArr[questionsEntity.get().getDifficulty()-1]);
-        questionDetailResponse.setLevel(difficultyArr[questionsEntity.get().getLevel()-1]);
+        questionDetailResponse.setLevel(levelArr[questionsEntity.get().getLevel()-1]);
         for(MediaEntity eachMedia : questionsEntity.get().getMediaEntityList()) {
             if (eachMedia.getType() == 1)
                 questionDetailResponse.setPhotoUrl(eachMedia.getUrl());
