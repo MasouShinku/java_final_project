@@ -19,6 +19,11 @@ public class UserController {
 
 //    @PostMapping
 
+    /** 登录方法
+     *
+     * @param userLoginRequest
+     * @return userLoginResponse
+     */
     @PostMapping("/login")
     public ResponseEntity<?> userLogin(@RequestBody UserLoginRequest userLoginRequest){
         System.out.println("controller:");

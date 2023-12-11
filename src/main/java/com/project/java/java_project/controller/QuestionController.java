@@ -28,21 +28,24 @@ public class QuestionController {
 //    按条件筛选题目列表
 //    POST请求
 
+    /**
+     * @param searchQuestionRequest
+     * @return searchQuestionResponse
+     */
     @PostMapping("/search")
     public ResponseEntity<?> searchQuestion(@RequestBody SearchQuestionRequest searchQuestionRequest){
-        List<SearchQuestionResponse> searchQuestionReponse=questionService.searchQuestion(searchQuestionRequest.getLevel(), searchQuestionRequest.getDifficulty(), searchQuestionRequest.getSearchKey());
-        return ResponseEntity.ok().body(searchQuestionReponse);
+        List<SearchQuestionResponse> searchQuestionResponse=questionService.searchQuestion(searchQuestionRequest.getLevel(), searchQuestionRequest.getDifficulty(), searchQuestionRequest.getSearchKey());
+        return ResponseEntity.ok().body(searchQuestionResponse);
     }
 
-//    按题目id查看题目详情
-//    GET请求，形如?id={id}
+
+    /**查看题目详情
+     * @Param id 题目id
+     * @return questionDetailResponse
+     */
     @GetMapping("/detail")
     public ResponseEntity<?> getQuestionDetail(@RequestParam int id){
-//        JSONObject jsonObject = new JSONObject();
         QuestionDetailResponse questionDetailResponse=questionService.questionDetail(id);
-//        System.out.println(questionsEntity.get().getMediaEntityList());
-
-
         return ResponseEntity.ok().body(questionDetailResponse);
     }
 
