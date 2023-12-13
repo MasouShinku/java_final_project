@@ -1,6 +1,7 @@
 package com.project.java.java_project.service;
 
 
+import cn.dev33.satoken.stp.StpUtil;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.project.java.java_project.dto.QuestionDetailResponse;
 import com.project.java.java_project.dto.SearchQuestionResponse;
@@ -85,7 +86,14 @@ public class QuestionService {
 //        questionDetailResponse.set
     }
 
-    public UploadQuestionResponse uploadQuestion(int userId, String title, String description, String level, String difficulty, List<MultipartFile> fileList){
+    public UploadQuestionResponse uploadQuestion( String title, String description, String level, String difficulty, List<MultipartFile> fileList){
+//        首先获取一下userId
+        int userId= StpUtil.getLoginIdAsInt();
+        System.out.println("user id is "+userId);
+
+
+
+
         for(MultipartFile file : fileList)
             System.out.println(file.getOriginalFilename());
 

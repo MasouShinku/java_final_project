@@ -1,5 +1,7 @@
 package com.project.java.java_project.controller;
 
+import cn.dev33.satoken.stp.StpUtil;
+import cn.dev33.satoken.util.SaResult;
 import com.project.java.java_project.dto.UserLoginRequest;
 import com.project.java.java_project.dto.UserLoginResponse;
 import com.project.java.java_project.service.UserService;
@@ -32,5 +34,16 @@ public class UserController {
         UserLoginResponse userLoginResponse=userService.getUserToken(userLoginRequest.getName(),userLoginRequest.getPassword());
         return ResponseEntity.ok().body(userLoginResponse);
     }
+
+    @GetMapping("saTest")
+    public ResponseEntity<?> saTest(@RequestParam String tokenValue){
+        return ResponseEntity.ok().body(StpUtil.getLoginIdByToken(tokenValue));
+    }
+
+    @GetMapping("saRoleTest")
+    public ResponseEntity<?> saRoleTest(){
+        return ResponseEntity.ok().body(StpUtil.getPermissionList());
+    }
+
 
 }

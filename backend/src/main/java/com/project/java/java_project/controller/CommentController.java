@@ -27,7 +27,7 @@ public class CommentController {
 
     @PostMapping("/publishComment")
     public ResponseEntity<?> publishComment(@RequestBody PublishCommentRequest publishCommentRequest){
-        PublishCommentResponse publishCommentResponse=commentService.publishComment(publishCommentRequest.getUserId(), publishCommentRequest.getQuestionId(), publishCommentRequest.getText());
+        PublishCommentResponse publishCommentResponse=commentService.publishComment(publishCommentRequest.getQuestionId(), publishCommentRequest.getText());
         return ResponseEntity.ok().body(publishCommentResponse);
     }
 }

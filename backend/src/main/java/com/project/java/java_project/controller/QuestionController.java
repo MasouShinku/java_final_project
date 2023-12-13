@@ -87,7 +87,7 @@ public class QuestionController {
         for(MultipartFile file : fileList)
             System.out.println(file.getOriginalFilename());
 
-        UploadQuestionResponse uploadQuestionResponse= questionService.uploadQuestion(Integer.parseInt(params.getParameter("userId")),params.getParameter("title"),params.getParameter("description"),params.getParameter("level"),params.getParameter("difficulty"),fileList);
+        UploadQuestionResponse uploadQuestionResponse= questionService.uploadQuestion(params.getParameter("title"),params.getParameter("description"),params.getParameter("level"),params.getParameter("difficulty"),fileList);
         return ResponseEntity.ok().body(uploadQuestionResponse);
     }
 

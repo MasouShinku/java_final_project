@@ -1,5 +1,6 @@
 package com.project.java.java_project.service;
 
+import cn.dev33.satoken.stp.StpUtil;
 import com.project.java.java_project.dto.UserLoginResponse;
 import com.project.java.java_project.model.UsersEntity;
 import com.project.java.java_project.repository.UserRepository;
@@ -40,8 +41,10 @@ public class UserService {
         System.out.println("查找用户成功！isPresent= "+user.isPresent());
         UserLoginResponse userLoginResponse=new UserLoginResponse();
         if(user.isPresent()){
+//            sa-token设置登录
+            StpUtil.login(user.get().getId());
             userLoginResponse.setStatus(true);
-            userLoginResponse.setToken("this is a token");
+            userLoginResponse.setToken( StpUtil.getTokenInfo().tokenValue);
             return userLoginResponse;
         }
         return userLoginResponse;
