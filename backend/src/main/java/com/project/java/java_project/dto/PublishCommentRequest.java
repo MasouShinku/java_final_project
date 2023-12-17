@@ -6,7 +6,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class PublishCommentRequest {
-    private int userId;
     private int questionId;
     private String text;
 }

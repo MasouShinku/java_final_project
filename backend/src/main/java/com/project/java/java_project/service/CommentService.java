@@ -1,6 +1,7 @@
 package com.project.java.java_project.service;
 
 import cn.dev33.satoken.stp.StpUtil;
+import com.project.java.java_project.dto.GetCommentListResponse;
 import com.project.java.java_project.dto.GetCommentResponse;
 import com.project.java.java_project.dto.PublishCommentResponse;
 import com.project.java.java_project.model.CommentEntity;
@@ -16,8 +17,10 @@ public class CommentService {
     @Autowired
     private CommentRepository commentRepository;
 
-    public List<GetCommentResponse> getComment(Integer id){
-        return commentRepository.findUserAndCommentTextByQuestionId(id);
+    public GetCommentListResponse getComment(Integer id){
+        GetCommentListResponse getCommentListResponse=new GetCommentListResponse();
+        getCommentListResponse.setGetCommentResponseList(commentRepository.findUserAndCommentTextByQuestionId(id));
+        return getCommentListResponse;
     }
 
     public PublishCommentResponse publishComment(int questionId,String text){

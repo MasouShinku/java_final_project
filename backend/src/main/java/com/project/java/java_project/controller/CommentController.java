@@ -1,9 +1,6 @@
 package com.project.java.java_project.controller;
 
-import com.project.java.java_project.dto.GetCommentResponse;
-import com.project.java.java_project.dto.PublishCommentRequest;
-import com.project.java.java_project.dto.PublishCommentResponse;
-import com.project.java.java_project.dto.QuestionDetailResponse;
+import com.project.java.java_project.dto.*;
 import com.project.java.java_project.service.CommentService;
 import com.project.java.java_project.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +17,9 @@ public class CommentController {
     private CommentService commentService;
 
     @GetMapping("/getComment")
+    @ResponseBody
     public ResponseEntity<?> getQuestionDetail(@RequestParam int id){
-        List<GetCommentResponse> response=commentService.getComment(id);
+        GetCommentListResponse response=commentService.getComment(id);
         return ResponseEntity.ok().body(response);
     }
 
