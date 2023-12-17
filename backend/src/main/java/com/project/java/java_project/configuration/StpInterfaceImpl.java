@@ -24,7 +24,7 @@ public class StpInterfaceImpl implements StpInterface {
     }
 
     /**
-     * 返回一个账号所拥有的角色标识集合 (权限与角色可分开校验)
+     * 返回一个账号所拥有的角色标识集合
      */
     @Override
     public List<String> getRoleList(Object loginId, String loginType) {

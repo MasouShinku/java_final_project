@@ -25,6 +25,12 @@ public class CommentController {
         return ResponseEntity.ok().body(response);
     }
 
+
+    /**发布评论
+     * 需要角色为user才可以使用
+     * @param publishCommentRequest
+     * @return
+     */
     @PostMapping("/publishComment")
     public ResponseEntity<?> publishComment(@RequestBody PublishCommentRequest publishCommentRequest){
         PublishCommentResponse publishCommentResponse=commentService.publishComment(publishCommentRequest.getQuestionId(), publishCommentRequest.getText());

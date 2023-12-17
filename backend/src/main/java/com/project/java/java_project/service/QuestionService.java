@@ -3,6 +3,7 @@ package com.project.java.java_project.service;
 
 import cn.dev33.satoken.stp.StpUtil;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.project.java.java_project.dto.ImportQuestionResponse;
 import com.project.java.java_project.dto.QuestionDetailResponse;
 import com.project.java.java_project.dto.SearchQuestionResponse;
 import com.project.java.java_project.dto.UploadQuestionResponse;
@@ -18,6 +19,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.swing.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -110,8 +115,6 @@ public class QuestionService {
         questionsEntity.setDescription(description);
         questionsEntity.setUserId(userId);
 
-
-//        questionRepository.save(questionsEntity);
         try {
             QuestionsEntity savedQuestionEntity = questionRepository.save(questionsEntity);
             // 保存成功，可以继续处理
@@ -129,21 +132,18 @@ public class QuestionService {
 //                数据库插入媒体实体
                 MediaEntity mediaEntity = new MediaEntity();
                 mediaEntity.setQuestionsEntity(savedQuestionEntity);
-                mediaEntity.setType(1);
+
                 mediaEntity.setUrl(fileInfo.getUrl());
+                if(fileInfo.getExt().equals("png")||fileInfo.getExt().equals("jpg"))
+                    mediaEntity.setType(1);
+                else if(fileInfo.getExt().equals("mp4"))
+                    mediaEntity.setType(2);
+                else mediaEntity.setType(3);
                 mediaRepository.save(mediaEntity);
-
-
-
-
 
                 System.out.println(fileInfo.getUrl());
 
             }
-
-
-
-
 
 
             uploadQuestionResponse.setMessage("success");
@@ -161,7 +161,104 @@ public class QuestionService {
 
         return uploadQuestionResponse;
 
-
     }
+
+
+
+
+    public ImportQuestionResponse importQuestion(MultipartFile file) {
+        //        首先获取一下userId
+        int userId= StpUtil.getLoginIdAsInt();
+        System.out.println("user id is "+userId);
+        List<QuestionsEntity> questions=new ArrayList<>();
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(file.getInputStream()))) {
+            String line;
+            String difficulty;
+            String level;
+            StringBuilder descriptionBuilder = new StringBuilder();
+            QuestionsEntity currentQuestion=new QuestionsEntity();
+
+
+
+            while ((line = reader.readLine()) != null) {
+                if (line.startsWith("标题")) {
+                    if (currentQuestion.getTopic() != null) {
+                        currentQuestion.setDescription(descriptionBuilder.toString().trim()) ;
+                        System.out.println("描述为："+currentQuestion.getDescription());
+
+//                        System.out.println("===============================================");
+//                        System.out.println("标题为："+currentQuestion.getTopic());
+
+                        currentQuestion.setUserId(userId);
+                        questions.add(currentQuestion);
+                    }
+                    currentQuestion = new QuestionsEntity();
+                    descriptionBuilder = new StringBuilder();
+                    currentQuestion.setTopic(line.substring(2).trim()) ;
+                    System.out.println("===============================================");
+                    System.out.println("标题为："+currentQuestion.getTopic());
+                } else if (line.startsWith("难度")) {
+                    difficulty=line.substring(2).trim();
+                    System.out.println("难度为："+difficulty);
+
+                    if(difficulty.equals("简单"))
+                        currentQuestion.setDifficulty(1);
+                    else if(difficulty.equals("普通"))
+                        currentQuestion.setDifficulty(2);
+                    else if (difficulty.equals("困难"))
+                        currentQuestion.setDifficulty(3);
+                    else {
+                        ImportQuestionResponse importQuestionResponse=new ImportQuestionResponse();
+                        importQuestionResponse.setMessage("难度出错，请检查");
+                    }
+                } else if (line.startsWith("等级")) {
+                    level=line.substring(2).trim();
+                    System.out.println("等级为："+level);
+                    if(level.equals("学前"))
+                        currentQuestion.setLevel(1);
+                    else if(level.equals("小学"))
+                        currentQuestion.setLevel(2);
+                    else if (level.equals("中学"))
+                        currentQuestion.setLevel(3);
+                    else if (level.equals("大学"))
+                        currentQuestion.setLevel(4);
+                    else if (level.equals("其他"))
+                        currentQuestion.setLevel(5);
+                    else {
+                        ImportQuestionResponse importQuestionResponse=new ImportQuestionResponse();
+                        importQuestionResponse.setMessage("等级出错，请检查");
+                    }
+                } else if(line.startsWith("题目描述")){
+                    descriptionBuilder.append(line.substring(4).trim()).append("\n");
+                }
+                else {
+                    // 累加描述的内容
+                    descriptionBuilder.append(line).append("\n");
+                }
+            }
+            // 添加最后一个问题
+            currentQuestion.setDescription( descriptionBuilder.toString().trim());
+            System.out.println("描述为："+currentQuestion.getDescription());
+
+            currentQuestion.setUserId(userId);
+            questions.add(currentQuestion);
+
+
+            questionRepository.saveAll(questions);
+        } catch (IOException e) {
+            e.printStackTrace();
+            ImportQuestionResponse importQuestionResponse=new ImportQuestionResponse();
+            importQuestionResponse.setMessage("failed");
+            return importQuestionResponse;
+        }
+
+
+        ImportQuestionResponse importQuestionResponse=new ImportQuestionResponse();
+        importQuestionResponse.setMessage("success");
+
+
+        return importQuestionResponse;
+    }
+
 
 }

@@ -1,11 +1,14 @@
 package com.project.java.java_project.controller;
 
 
+import cn.dev33.satoken.annotation.SaCheckLogin;
+import cn.dev33.satoken.annotation.SaCheckRole;
 import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.project.java.java_project.dto.*;
 import com.project.java.java_project.model.QuestionsEntity;
 import com.project.java.java_project.repository.QuestionRepository;
 import com.project.java.java_project.service.QuestionService;
+import com.sun.tools.jconsole.JConsoleContext;
 import jakarta.annotation.Nonnull;
 import jakarta.servlet.http.HttpServletRequest;
 import org.antlr.v4.runtime.misc.NotNull;
@@ -52,32 +55,15 @@ public class QuestionController {
         return ResponseEntity.ok().body(questionDetailResponse);
     }
 
-//    @PostMapping("/upload")
-//    public ResponseEntity<?> uploadQuestion(@RequestBody UploadQuestionRequest uploadQuestionRequest){
-//        UploadQuestionResponse uploadQuestionResponse= questionService.uploadQuestion(uploadQuestionRequest.getUserId(),uploadQuestionRequest.getTitle(),uploadQuestionRequest.getDescription(),uploadQuestionRequest.getLevel(),uploadQuestionRequest.getDifficulty());
-//        return ResponseEntity.ok().body(uploadQuestionResponse);
-//    }
 
 
-//    @PostMapping("/upload")
-//    public ResponseEntity<?> uploadQuestion(@RequestPart UploadQuestionRequest uploadQuestionRequest){
-//        UploadQuestionResponse uploadQuestionResponse= questionService.uploadQuestion(uploadQuestionRequest.getUserId(),uploadQuestionRequest.getTitle(),uploadQuestionRequest.getDescription(),uploadQuestionRequest.getLevel(),uploadQuestionRequest.getDifficulty(),uploadQuestionRequest.getFileList());
-//        return ResponseEntity.ok().body(uploadQuestionResponse);
-//    }
-
-//    @PostMapping("/upload")
-//    public ResponseEntity<?> uploadQuestion(
-//            @RequestPart("userId") int userId,
-//            @RequestPart("level") String level,
-//            @RequestPart("difficulty") String difficulty,
-//            @RequestPart("title") String title,
-//            @RequestPart("description") String description,
-//            @RequestPart("fileList") List<MultipartFile> fileList
-//    ){
-//        UploadQuestionResponse uploadQuestionResponse= questionService.uploadQuestion(userId,title,description,level,difficulty,fileList);
-//        return ResponseEntity.ok().body(uploadQuestionResponse);
-//    }
-
+    /**上传题目，请求为form-data形式
+     * 需要角色为user才可以使用
+     *
+     * @param request 表单请求对象
+     * @return uploadQuestionResponse
+     */
+    @SaCheckRole("user")
     @PostMapping("/upload")
     public ResponseEntity<?> uploadQuestion( HttpServletRequest request){
         MultipartHttpServletRequest params=((MultipartHttpServletRequest) request);
@@ -89,6 +75,20 @@ public class QuestionController {
 
         UploadQuestionResponse uploadQuestionResponse= questionService.uploadQuestion(params.getParameter("title"),params.getParameter("description"),params.getParameter("level"),params.getParameter("difficulty"),fileList);
         return ResponseEntity.ok().body(uploadQuestionResponse);
+    }
+
+
+    /**导入题目，请求为form-data形式
+     *
+     * 需要角色为user才可以使用
+     */
+    @SaCheckRole("user")
+    @PostMapping("/import")
+    public ResponseEntity<?> importQuestion( HttpServletRequest request){
+        MultipartHttpServletRequest params=((MultipartHttpServletRequest) request);
+        MultipartFile file=((MultipartHttpServletRequest) request).getFile("file");
+        ImportQuestionResponse importQuestionResponse= questionService.importQuestion(file);
+        return ResponseEntity.ok().body(importQuestionResponse);
     }
 
 
