@@ -44,9 +44,17 @@ public class UserService {
 //            sa-token设置登录
             StpUtil.login(user.get().getId());
             userLoginResponse.setStatus(true);
-            userLoginResponse.setToken( StpUtil.getTokenInfo().tokenValue);
+            userLoginResponse.setToken(StpUtil.getTokenInfo().tokenValue);
             return userLoginResponse;
         }
+        // 否则直接创建用户
+        UsersEntity usersEntity=new UsersEntity();
+        usersEntity.setName(name);
+        usersEntity.setPassword(password);
+        UsersEntity savedUser=userRepository.save(usersEntity);
+        StpUtil.login(savedUser.getId());
+        userLoginResponse.setStatus(true);
+        userLoginResponse.setToken(StpUtil.getTokenInfo().tokenValue);
         return userLoginResponse;
 
     }
