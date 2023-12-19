@@ -15,21 +15,6 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-//    用户存在则返回token
-//    public String getUserToken(String name,String password){
-//        System.out.println("service:");
-//        System.out.println("user name is : "+name);
-//        System.out.println("user password is : "+password);
-//
-//        Optional<UsersEntity> user=userRepository.findUsersEntitiesByNameAndPassword(name,password);
-//        if(user.isPresent()){
-//            return "token example";
-//        }
-//        return null;
-//
-//    }
-
-
 
 
     public UserLoginResponse getUserToken(String name, String password){
