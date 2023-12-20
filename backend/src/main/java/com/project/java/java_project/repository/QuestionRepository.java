@@ -16,9 +16,6 @@ import java.util.Optional;
 @Repository
 public interface QuestionRepository extends JpaRepository<QuestionsEntity,Integer> {
 
-//    根据用户传入参数返回题目
-//    传入-1说明不限
-//    keyword为""不需要专门处理
 
     /**根据筛选条件返回题目列表
      *
@@ -27,17 +24,15 @@ public interface QuestionRepository extends JpaRepository<QuestionsEntity,Intege
      * @param keyword       关键字，可为空串
      * @return List<SearchQuestionResponse>
      */
-    @Query("SELECT new com.project.java.java_project.dto.SearchQuestionResponse(q.id, q.topic, q.description, q.level, q.difficulty) " +
+    @Query("SELECT new com.project.java.java_project.dto.QuestionDTO.SearchQuestionResponse(q.id, q.topic, q.description, q.level, q.difficulty) " +
     "FROM QuestionsEntity q WHERE " +
     "(q.level = :level OR :level = -1) " +
     "AND (q.difficulty = :difficulty OR :difficulty = -1) " +
-    "AND (q.description LIKE concat('%',:keyword,'%') )")
+    "AND ((q.description LIKE concat('%',:keyword,'%') )or(q.topic LIKE concat('%',:keyword,'%') ) )")
     List<SearchQuestionResponse> searchQuestions(@Param("level") Integer level,
                                                  @Param("difficulty") Integer difficulty,
                                                  @Param("keyword") String keyword);
 
-
-//    @Query("SELECT q FROM QuestionsEntity q LEFT JOIN FETCH q.mediaEntityList m WHERE q.id = :id")
 
     /** 获取题目的媒体列表
      *

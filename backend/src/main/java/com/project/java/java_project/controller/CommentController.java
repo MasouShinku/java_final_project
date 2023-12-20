@@ -14,9 +14,14 @@ public class CommentController {
     @Autowired
     private CommentService commentService;
 
+    /**
+     * get方法，获取评论列表
+     * @param id-题目id
+     * @return GetCommentListResponse
+     */
     @GetMapping("/getComment")
     @ResponseBody
-    public ResponseEntity<?> getQuestionDetail(@RequestParam int id){
+    public ResponseEntity<?> getComment(@RequestParam int id){
         GetCommentListResponse response=commentService.getComment(id);
         return ResponseEntity.ok().body(response);
     }

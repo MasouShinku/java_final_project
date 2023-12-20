@@ -12,6 +12,6 @@ import java.util.List;
 @Repository
 public interface CommentRepository extends JpaRepository <CommentEntity,Integer>{
 
-    @Query("SELECT new com.project.java.java_project.dto.GetCommentResponse(u.name,c.text) FROM UsersEntity u JOIN CommentEntity c ON u.id = c.userId WHERE c.questionId = :id")
+    @Query("SELECT new com.project.java.java_project.dto.CommentDTO.GetCommentResponse(u.name,c.text) FROM UsersEntity u JOIN CommentEntity c ON u.id = c.userId WHERE c.questionId = :id")
     List<GetCommentResponse> findUserAndCommentTextByQuestionId(@Param("id") Integer id);
 }

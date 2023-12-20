@@ -23,9 +23,6 @@ public class UserController {
      */
     @PostMapping("/login")
     public ResponseEntity<?> userLogin(@RequestBody UserLoginRequest userLoginRequest){
-        System.out.println("controller:");
-        System.out.println("user name is : "+userLoginRequest.getName());
-        System.out.println("user password is : "+userLoginRequest.getPassword());
         UserLoginResponse userLoginResponse=userService.getUserToken(userLoginRequest.getName(),userLoginRequest.getPassword());
         return ResponseEntity.ok().body(userLoginResponse);
     }
