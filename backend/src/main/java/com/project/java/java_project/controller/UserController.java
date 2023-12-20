@@ -1,14 +1,10 @@
 package com.project.java.java_project.controller;
 
 import cn.dev33.satoken.stp.StpUtil;
-import cn.dev33.satoken.util.SaResult;
-import com.project.java.java_project.dto.UserLoginRequest;
-import com.project.java.java_project.dto.UserLoginResponse;
+import com.project.java.java_project.dto.UserDTO.UserLoginRequest;
+import com.project.java.java_project.dto.UserDTO.UserLoginResponse;
 import com.project.java.java_project.service.UserService;
-import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,10 +15,9 @@ public class UserController {
     @Autowired
     UserService userService;
 
-//    @PostMapping
 
     /** 登录方法
-     *
+     *用户不存在时创建新用户
      * @param userLoginRequest
      * @return userLoginResponse
      */
@@ -33,16 +28,6 @@ public class UserController {
         System.out.println("user password is : "+userLoginRequest.getPassword());
         UserLoginResponse userLoginResponse=userService.getUserToken(userLoginRequest.getName(),userLoginRequest.getPassword());
         return ResponseEntity.ok().body(userLoginResponse);
-    }
-
-    @GetMapping("saTest")
-    public ResponseEntity<?> saTest(@RequestParam String tokenValue){
-        return ResponseEntity.ok().body(StpUtil.getLoginIdByToken(tokenValue));
-    }
-
-    @GetMapping("saRoleTest")
-    public ResponseEntity<?> saRoleTest(){
-        return ResponseEntity.ok().body(StpUtil.getPermissionList());
     }
 
 

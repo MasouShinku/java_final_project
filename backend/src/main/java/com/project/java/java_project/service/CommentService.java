@@ -1,16 +1,12 @@
 package com.project.java.java_project.service;
 
 import cn.dev33.satoken.stp.StpUtil;
-import com.project.java.java_project.dto.GetCommentListResponse;
-import com.project.java.java_project.dto.GetCommentResponse;
-import com.project.java.java_project.dto.PublishCommentResponse;
+import com.project.java.java_project.dto.CommentDTO.GetCommentListResponse;
+import com.project.java.java_project.dto.CommentDTO.PublishCommentResponse;
 import com.project.java.java_project.model.CommentEntity;
 import com.project.java.java_project.repository.CommentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.Objects;
 
 @Service
 public class CommentService {

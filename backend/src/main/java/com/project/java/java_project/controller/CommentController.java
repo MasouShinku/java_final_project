@@ -1,14 +1,12 @@
 package com.project.java.java_project.controller;
 
-import com.project.java.java_project.dto.*;
+import com.project.java.java_project.dto.CommentDTO.GetCommentListResponse;
+import com.project.java.java_project.dto.CommentDTO.PublishCommentRequest;
+import com.project.java.java_project.dto.CommentDTO.PublishCommentResponse;
 import com.project.java.java_project.service.CommentService;
-import com.project.java.java_project.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.Objects;
 
 @RestController
 @RequestMapping("/api/comment")

@@ -1,4 +1,4 @@
-package com.project.java.java_project.dto;
+package com.project.java.java_project.dto.QuestionDTO;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;

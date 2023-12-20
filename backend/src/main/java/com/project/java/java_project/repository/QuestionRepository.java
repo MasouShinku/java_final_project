@@ -2,7 +2,7 @@ package com.project.java.java_project.repository;
 
 
 
-import com.project.java.java_project.dto.SearchQuestionResponse;
+import com.project.java.java_project.dto.QuestionDTO.SearchQuestionResponse;
 import com.project.java.java_project.model.QuestionsEntity;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;

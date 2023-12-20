@@ -1,4 +1,4 @@
-package com.project.java.java_project.dto;
+package com.project.java.java_project.dto.UserDTO;
 
 
 import cn.dev33.satoken.stp.SaTokenInfo;

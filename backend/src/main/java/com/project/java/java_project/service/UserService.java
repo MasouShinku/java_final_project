@@ -1,7 +1,7 @@
 package com.project.java.java_project.service;
 
 import cn.dev33.satoken.stp.StpUtil;
-import com.project.java.java_project.dto.UserLoginResponse;
+import com.project.java.java_project.dto.UserDTO.UserLoginResponse;
 import com.project.java.java_project.model.UsersEntity;
 import com.project.java.java_project.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -3,10 +3,10 @@ package com.project.java.java_project.service;
 
 import cn.dev33.satoken.stp.StpUtil;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.project.java.java_project.dto.ImportQuestionResponse;
-import com.project.java.java_project.dto.QuestionDetailResponse;
-import com.project.java.java_project.dto.SearchQuestionResponse;
-import com.project.java.java_project.dto.UploadQuestionResponse;
+import com.project.java.java_project.dto.QuestionDTO.ImportQuestionResponse;
+import com.project.java.java_project.dto.QuestionDTO.QuestionDetailResponse;
+import com.project.java.java_project.dto.QuestionDTO.SearchQuestionResponse;
+import com.project.java.java_project.dto.QuestionDTO.UploadQuestionResponse;
 import com.project.java.java_project.model.MediaEntity;
 import com.project.java.java_project.model.QuestionsEntity;
 import com.project.java.java_project.repository.MediaRepository;
@@ -18,9 +18,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.swing.*;
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;

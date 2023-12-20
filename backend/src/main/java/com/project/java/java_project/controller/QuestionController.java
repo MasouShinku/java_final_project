@@ -1,27 +1,17 @@
 package com.project.java.java_project.controller;
 
 
-import cn.dev33.satoken.annotation.SaCheckLogin;
 import cn.dev33.satoken.annotation.SaCheckRole;
-import com.fasterxml.jackson.databind.util.JSONPObject;
-import com.project.java.java_project.dto.*;
-import com.project.java.java_project.model.QuestionsEntity;
-import com.project.java.java_project.repository.QuestionRepository;
+import com.project.java.java_project.dto.QuestionDTO.*;
 import com.project.java.java_project.service.QuestionService;
-import com.sun.tools.jconsole.JConsoleContext;
-import jakarta.annotation.Nonnull;
 import jakarta.servlet.http.HttpServletRequest;
-import org.antlr.v4.runtime.misc.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import java.util.Enumeration;
 import java.util.List;
-import java.util.Locale;
-import java.util.Optional;
 
 
 @RestController
@@ -31,10 +21,9 @@ public class QuestionController {
     @Autowired
     private QuestionService questionService;
 
-//    按条件筛选题目列表
-//    POST请求
 
-    /**
+
+    /**按条件查询题目，返回题目列表
      * @param searchQuestionRequest
      * @return searchQuestionResponse
      */
@@ -79,7 +68,6 @@ public class QuestionController {
 
 
     /**导入题目，请求为form-data形式
-     *
      * 需要角色为user才可以使用
      */
     @SaCheckRole("user")
