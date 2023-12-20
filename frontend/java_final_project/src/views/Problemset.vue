@@ -54,8 +54,8 @@
                     <div class="questions-right"></div>
                 </div>
                 <div class="pages">
-                    <el-pagination class="pagination" layout="prev, pager, next" :total=questions.length
-                        @current-change="handleCurrentChange" />
+                    <el-pagination class="pagination" style="background-color: rgba(0, 0, 0, 0);" layout="prev, pager, next"
+                        :total=questions.length @current-change="handleCurrentChange" />
                 </div>
             </el-main>
         </el-container>
@@ -351,7 +351,7 @@ export default {
 
         // 进入界面时候先请求一次
         const loadData = () => {
-            axios.post('http://localhost:8080/api/question/search', {
+            axios.post('http://101.43.181.83:8080/api/question/search', {
                 level: -1,
                 difficulty: -1,
                 searchKey: ""
@@ -407,7 +407,7 @@ export default {
             // console.log("key: " + searchKey.value)
 
 
-            axios.post('http://localhost:8080/api/question/search', {
+            axios.post('http://101.43.181.83:8080/api/question/search', {
                 level: levelValue,
                 difficulty: difficultyValue,
                 searchKey: searchKey.value

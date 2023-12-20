@@ -273,7 +273,7 @@ export default {
                         formData.append('fileList', file.raw)
                     }
                     console.log(formData)
-                    const response = await axios.post('http://localhost:8080/api/question/upload', formData, {
+                    const response = await axios.post('http://101.43.181.83:8080/api/question/upload', formData, {
                         headers: {
                             'Content-Type': 'multipart/form-data',
                             "satoken": localStorage.getItem('satoken')
@@ -378,7 +378,7 @@ export default {
                     formData.append('file', file.raw)
                 }
                 console.log(formData)
-                const response = await axios.post('http://localhost:8080/api/question/import', formData, {
+                const response = await axios.post('http://101.43.181.83:8080/api/question/import', formData, {
                     headers: {
                         'Content-Type': 'multipart/form-data',
                         "satoken": localStorage.getItem('satoken')

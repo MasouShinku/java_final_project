@@ -6,8 +6,7 @@
       <el-input class="pwd-input" v-model="password" placeholder="请输入密码" />
       <el-button class="login-btn" type="danger" @click=onLogin>登录</el-button>
       <div class="footer">
-        <a href="#">忘记密码?</a>
-        <a href="#">注册账号</a>
+
       </div>
     </div>
   </div>
@@ -65,7 +64,6 @@ h1 {
   padding-left: 30px;
   padding-right: 30px;
   margin-top: 40px;
-  /* border: none; */
   border-radius: 5px;
   background-color: #ff85a2;
   color: white;
@@ -114,7 +112,7 @@ export default {
         password: password.value
       }
 
-      axios.post('http://localhost:8080/api/user/login', userData)
+      axios.post('http://101.43.181.83:8080/api/user/login', userData)
         .then(response => {
           // 处理一下逻辑
           console.log(response.data);
@@ -132,10 +130,6 @@ export default {
           console.log(error);
         });
 
-
-
-      // console.log(username.value, password.value);
-      // router.push('/problemset');
     }
 
     return {

@@ -89,7 +89,7 @@
                                 <el-button type="primary" :icon="Upload" style="width: 25%;height: 30px;"
                                     @click="dialogFormVisible = true">发布评论</el-button>
                             </div>
-                            <el-dialog v-model="dialogFormVisible" title="Shipping address" style="width: 700px;">
+                            <el-dialog v-model="dialogFormVisible" title="发布评论" style="width: 700px;">
                                 <el-form :model="form">
                                     <el-form-item label="评论内容" label-width="100px">
                                         <el-input v-model="form.text" autocomplete="off" style="width: 500px;" :rows="5"
@@ -220,7 +220,7 @@ export default {
             // 请求一下题目详细信息
             try {
                 console.log(questonidStore.questionid);
-                const response = await axios.get('http://localhost:8080/api/question/detail?id=' + localStorage.getItem("questionId"))
+                const response = await axios.get('http://101.43.181.83:8080/api/question/detail?id=' + localStorage.getItem("questionId"))
                 questionDetail.value = response.data;
                 console.log(response.data)
             } catch (error) {
@@ -231,7 +231,7 @@ export default {
             // 请求一下评论
             try {
                 console.log(questonidStore.questionid);
-                const response = await axios.get('http://localhost:8080/api/comment/getComment?id=' + localStorage.getItem("questionId"))
+                const response = await axios.get('http://101.43.181.83:8080/api/comment/getComment?id=' + localStorage.getItem("questionId"))
                 commentList.value = response.data.getCommentResponseList;
                 console.log(response.data)
             } catch (error) {
@@ -272,7 +272,7 @@ export default {
                 }
                 try {
                     console.log(commentData)
-                    const response = await axios.post('http://localhost:8080/api/comment/publishComment', commentData, {
+                    const response = await axios.post('http://101.43.181.83:8080/api/comment/publishComment', commentData, {
                         headers: {
                             "satoken": localStorage.getItem('satoken')
                         }
