@@ -72,13 +72,10 @@ public class QuestionService {
         for(MediaEntity eachMedia : questionsEntity.get().getMediaEntityList()) {
             if (eachMedia.getType() == 1)
                 photoList.add(eachMedia.getUrl());
-//                questionDetailResponse.setPhotoUrl(eachMedia.getUrl());
             if (eachMedia.getType() == 2)
                 videoList.add(eachMedia.getUrl());
-//                questionDetailResponse.setVideoUrl(eachMedia.getUrl());
             if (eachMedia.getType() == 3)
                 audioList.add(eachMedia.getUrl());
-//                questionDetailResponse.setAudioUrl(eachMedia.getUrl());
         }
         questionDetailResponse.setPhotoUrl(photoList);
         questionDetailResponse.setVideoUrl(videoList);

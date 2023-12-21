@@ -53,7 +53,7 @@ public class QuestionController {
      */
     @SaCheckRole("user")
     @PostMapping("/upload")
-    public ResponseEntity<?> uploadQuestion( HttpServletRequest request){
+    public ResponseEntity<?> uploadQuestion(HttpServletRequest request){
         MultipartHttpServletRequest params=((MultipartHttpServletRequest) request);
 
         List<MultipartFile> fileList=((MultipartHttpServletRequest) request).getFiles("fileList");
