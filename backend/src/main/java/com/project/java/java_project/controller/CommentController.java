@@ -1,5 +1,6 @@
 package com.project.java.java_project.controller;
 
+import cn.dev33.satoken.annotation.SaCheckRole;
 import com.project.java.java_project.dto.CommentDTO.GetCommentListResponse;
 import com.project.java.java_project.dto.CommentDTO.PublishCommentRequest;
 import com.project.java.java_project.dto.CommentDTO.PublishCommentResponse;
@@ -32,6 +33,7 @@ public class CommentController {
      * @param publishCommentRequest
      * @return
      */
+    @SaCheckRole("user")
     @PostMapping("/publishComment")
     public ResponseEntity<?> publishComment(@RequestBody PublishCommentRequest publishCommentRequest){
         PublishCommentResponse publishCommentResponse=commentService.publishComment(publishCommentRequest.getQuestionId(), publishCommentRequest.getText());
